@@ -1,0 +1,32 @@
+#ifndef IDATABASE_H
+#define IDATABASE_H
+
+#include <QObject>
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QMessageBox>
+class IDatabase : public QObject
+{
+    Q_OBJECT
+public:
+
+
+        static IDatabase &getInstance()
+        {
+            static IDatabase instance; // Guaranteed to be destroyed.
+                                  // Instantiated on first use.
+            return instance;
+        }
+
+        void initDatabase();
+private:
+        explicit IDatabase(QObject *parent = nullptr);
+        IDatabase(IDatabase const&)               = delete;
+        void operator=(IDatabase const&)  = delete;
+
+        QSqlDatabase database;
+signals:
+
+};
+
+#endif // IDATABASE_H
